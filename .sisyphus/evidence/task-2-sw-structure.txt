@@ -1,0 +1,37 @@
+Task 2: Service Worker (sw.js) — Evidence
+==========================================
+
+FILE: /Users/wils/Projects/polyatomic/sw.js
+CREATED: 2026-03-02
+
+VALIDATION RESULTS:
+  ✅ node -c sw.js — syntax check passed (no errors)
+  ✅ install event listener — present (1 match)
+  ✅ activate event listener — present (1 match)
+  ✅ fetch event listener — present (1 match)
+  ✅ Tailwind CDN (https://cdn.tailwindcss.com) — in PRE_CACHE_URLS (1 match)
+
+STRUCTURE:
+  Cache name: 'polyatomic-v1'
+  Pre-cached URLs (7):
+    - /
+    - /index.html
+    - /manifest.json
+    - /icon-192.png
+    - /icon-512.png
+    - /apple-touch-icon.png
+    - https://cdn.tailwindcss.com
+
+  Install handler:
+    - Calls caches.open + cache.addAll for pre-caching
+    - Calls self.skipWaiting() for immediate activation
+
+  Activate handler:
+    - Purges old caches (any cache name !== CACHE_NAME)
+    - Calls self.clients.claim() for immediate control
+
+  Fetch handler:
+    - Cache-first: checks cache via caches.match()
+    - On cache miss: fetches from network
+    - Caches successful responses (response.ok || response.type === 'opaque')
+    - Graceful failure: returns 503 Response on network error

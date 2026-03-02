@@ -1,0 +1,2 @@
+MANIFEST VALID
+All required fields present: name, short_name, start_url, display, orientation, background_color, theme_color, icons

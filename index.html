@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <title>Polyatomic Ion Memorizer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -26,19 +31,29 @@
             color: white;
             border-color: #3b82f6;
         }
+
+        /* Mobile Optimizations */
+        @supports (padding: env(safe-area-inset-top)) {
+            body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+        }
+        html, body { overscroll-behavior-y: none; }
+        * { -webkit-tap-highlight-color: transparent; }
+        input { font-size: 16px !important; }
+        #ion-grid label > div { min-height: 44px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen text-slate-800 flex items-center justify-center p-4">
+<body class="bg-slate-100 min-h-screen text-slate-800 flex items-start sm:items-center justify-center p-4">
 
-    <div id="app" class="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden min-h-[500px] flex flex-col relative">
+    <div id="app" class="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden min-h-0 sm:min-h-[500px] flex flex-col relative">
         
         <!-- HEADER -->
-        <header class="bg-blue-600 text-white p-6 text-center shadow-md relative z-10">
-            <h1 class="text-3xl font-bold tracking-tight">Polyatomic Ion Memorizer</h1>
+        <header class="bg-blue-600 text-white p-4 sm:p-6 text-center shadow-md relative z-10">
+            <h1 class="text-xl sm:text-3xl font-bold tracking-tight">Polyatomic Ion Memorizer</h1>
             <p class="text-blue-100 mt-2">Master your chemical formulas</p>
         </header>
 
-        <div class="p-6 md:p-8 flex-grow flex flex-col relative">
+        <div class="p-4 sm:p-6 md:p-8 flex-grow flex flex-col relative">
             
             <!-- VIEW 1: SELECTION MENU -->
             <div id="view-menu" class="fade-in flex flex-col h-full">
@@ -47,13 +62,13 @@
                         <h2 class="text-xl font-semibold mb-1">Select ions to study:</h2>
                         <p class="text-sm text-slate-500">Choose the ones you want to be quizzed on.</p>
                     </div>
-                    <div class="space-x-2">
+                    <div class="flex flex-wrap gap-2">
                         <button id="btn-select-all" class="text-sm px-3 py-1.5 bg-slate-200 hover:bg-slate-300 rounded-md transition-colors text-slate-700 font-medium">Select All</button>
                         <button id="btn-deselect-all" class="text-sm px-3 py-1.5 bg-slate-200 hover:bg-slate-300 rounded-md transition-colors text-slate-700 font-medium">Clear</button>
                     </div>
                 </div>
 
-                <div id="ion-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8 overflow-y-auto pr-2 max-h-[40vh]">
+                <div id="ion-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8 overflow-y-auto pr-2 max-h-[45vh] sm:max-h-[40vh]">
                     <!-- Checkboxes injected here by JS -->
                 </div>
 
@@ -79,17 +94,17 @@
 
                 <div class="flex-grow flex flex-col items-center justify-center max-w-md mx-auto w-full text-center">
                     <h3 class="text-xl text-slate-500 mb-2">What is the formula for...</h3>
-                    <h2 id="quiz-question" class="text-5xl font-extrabold text-blue-900 mb-8 tracking-tight">Sulfate</h2>
+                    <h2 id="quiz-question" class="text-3xl sm:text-5xl font-extrabold text-blue-900 mb-8 tracking-tight">Sulfate</h2>
                     
                     <div class="w-full relative">
-                        <input type="text" id="quiz-input" autocomplete="off" placeholder="e.g. SO42-" class="w-full text-center text-3xl font-bold py-4 px-6 border-4 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-300 placeholder:normal-case placeholder:font-normal placeholder:text-xl">
+                        <input type="text" id="quiz-input" autocomplete="off" placeholder="e.g. SO42-" class="w-full text-center text-xl sm:text-3xl font-bold py-4 px-6 border-4 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-300 placeholder:normal-case placeholder:font-normal placeholder:text-xl">
                         
                         <div id="quiz-feedback" class="absolute -bottom-16 left-0 right-0 font-bold text-lg opacity-0 transition-opacity duration-200">
                             <!-- Feedback injected here -->
                         </div>
                     </div>
                     
-                    <button id="btn-submit" class="mt-20 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-xl transition-colors hidden">
+                    <button id="btn-submit" class="mt-8 sm:mt-20 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-xl transition-colors">
                         Submit
                     </button>
                 </div>
@@ -98,13 +113,13 @@
             <!-- VIEW 3: ASSESSMENT -->
             <div id="view-assessment" class="hidden fade-in flex-col h-full">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-slate-800">Your Assessment</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Your Assessment</h2>
                     <p class="text-slate-500 mt-2">Here is how well you know these ions based on your first attempt per question.</p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6 mb-8 flex-grow">
                     <!-- Mastered Column -->
-                    <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-100">
+                    <div class="bg-emerald-50 rounded-xl p-3 sm:p-5 border border-emerald-100">
                         <h3 class="text-emerald-800 font-bold text-lg border-b border-emerald-200 pb-2 mb-3 flex items-center justify-between">
                             Mastered
                             <span class="text-xs bg-emerald-200 text-emerald-800 px-2 py-1 rounded-full">>80%</span>
@@ -113,7 +128,7 @@
                     </div>
 
                     <!-- Learning Column -->
-                    <div class="bg-amber-50 rounded-xl p-5 border border-amber-100">
+                    <div class="bg-amber-50 rounded-xl p-3 sm:p-5 border border-amber-100">
                         <h3 class="text-amber-800 font-bold text-lg border-b border-amber-200 pb-2 mb-3 flex items-center justify-between">
                             Learning
                             <span class="text-xs bg-amber-200 text-amber-800 px-2 py-1 rounded-full">50-80%</span>
@@ -122,10 +137,10 @@
                     </div>
 
                     <!-- Needs Work Column -->
-                    <div class="bg-rose-50 rounded-xl p-5 border border-rose-100">
+                    <div class="bg-rose-50 rounded-xl p-3 sm:p-5 border border-rose-100">
                         <h3 class="text-rose-800 font-bold text-lg border-b border-rose-200 pb-2 mb-3 flex items-center justify-between">
                             Needs Work
-                            <span class="text-xs bg-rose-200 text-rose-800 px-2 py-1 rounded-full"><50%</span>
+                            <span class="text-xs bg-rose-200 text-rose-800 px-2 py-1 rounded-full">&lt;50%</span>
                         </h3>
                         <ul id="list-needswork" class="space-y-2"></ul>
                     </div>
@@ -186,6 +201,7 @@
         const quizQuestion = document.getElementById('quiz-question');
         const quizInput = document.getElementById('quiz-input');
         const quizFeedback = document.getElementById('quiz-feedback');
+        const btnSubmit = document.getElementById('btn-submit');
         const btnStop = document.getElementById('btn-stop');
         const quizCounter = document.getElementById('quiz-counter');
 
@@ -220,7 +236,9 @@
         }
 
         function switchView(viewToShow) {
-            [viewMenu, viewQuiz, viewAssessment].forEach(v => v.classList.add('hidden'));
+            [viewMenu, viewQuiz, viewAssessment].forEach(v => {
+                v.classList.add('hidden');
+            });
             viewToShow.classList.remove('hidden');
         }
 
@@ -231,12 +249,16 @@
             ionGrid.addEventListener('change', updateStartButton);
             
             btnSelectAll.addEventListener('click', () => {
-                document.querySelectorAll('.ion-checkbox').forEach(cb => cb.checked = true);
+                document.querySelectorAll('.ion-checkbox').forEach(cb => {
+                    cb.checked = true;
+                });
                 updateStartButton();
             });
 
             btnDeselectAll.addEventListener('click', () => {
-                document.querySelectorAll('.ion-checkbox').forEach(cb => cb.checked = false);
+                document.querySelectorAll('.ion-checkbox').forEach(cb => {
+                    cb.checked = false;
+                });
                 updateStartButton();
             });
 
@@ -246,6 +268,7 @@
             quizInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') handleSubmission();
             });
+            btnSubmit.addEventListener('click', handleSubmission);
 
             btnStop.addEventListener('click', endQuiz);
 
@@ -283,7 +306,7 @@
             // Reset state
             isRetrying = false;
             quizInput.value = '';
-            quizInput.className = "w-full text-center text-3xl font-bold py-4 px-6 border-4 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-300 placeholder:normal-case placeholder:font-normal placeholder:text-xl";
+            quizInput.className = "w-full text-center text-xl sm:text-3xl font-bold py-4 px-6 border-4 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-300 placeholder:normal-case placeholder:font-normal placeholder:text-xl";
             quizFeedback.style.opacity = '0';
             
             // Pick random ion (try to avoid repeating the immediately previous one if possible)
@@ -296,7 +319,7 @@
 
             // Render
             quizQuestion.innerHTML = currentIon.name;
-            quizInput.focus();
+            if (document.activeElement !== quizInput) quizInput.focus();
         }
 
         function handleSubmission() {
@@ -311,7 +334,8 @@
 
             if (isCorrect) {
                 // Correct path
-                quizInput.className = "w-full text-center text-3xl font-bold py-4 px-6 border-4 border-emerald-500 bg-emerald-50 text-emerald-800 rounded-xl focus:outline-none transition-colors uppercase";
+                if ('vibrate' in navigator) navigator.vibrate(50);
+                quizInput.className = "w-full text-center text-xl sm:text-3xl font-bold py-4 px-6 border-4 border-emerald-500 bg-emerald-50 text-emerald-800 rounded-xl focus:outline-none transition-colors uppercase";
                 quizFeedback.innerHTML = `<span class="text-emerald-600">Correct!</span>`;
                 quizFeedback.style.opacity = '1';
                 
@@ -327,7 +351,8 @@
 
             } else {
                 // Incorrect path
-                quizInput.className = "w-full text-center text-3xl font-bold py-4 px-6 border-4 border-rose-500 bg-rose-50 text-rose-800 rounded-xl focus:outline-none transition-colors uppercase";
+                if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
+                quizInput.className = "w-full text-center text-xl sm:text-3xl font-bold py-4 px-6 border-4 border-rose-500 bg-rose-50 text-rose-800 rounded-xl focus:outline-none transition-colors uppercase";
                 quizFeedback.innerHTML = `<span class="text-rose-600">Incorrect. The formula is <span class="font-bold text-2xl ml-2 text-rose-800 bg-white px-3 py-1 rounded shadow-sm border border-rose-200">${currentIon.html}</span></span>`;
                 quizFeedback.style.opacity = '1';
                 
@@ -394,6 +419,82 @@
 
         // Run application
         init();
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.warn('SW registration failed:', err));
+            });
+        }
+
+        let deferredInstallPrompt = null;
+        let installBannerDismissed = false;
+
+        function hideInstallBanner() {
+            const banner = document.getElementById('install-banner');
+            if (banner) banner.remove();
+        }
+
+        function createInstallBanner(messageText, isAndroidPrompt) {
+            if (installBannerDismissed || document.getElementById('install-banner')) return;
+            const appRoot = document.getElementById('app');
+            if (!appRoot) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'install-banner';
+            banner.className = 'bg-blue-50 border-b border-blue-200 px-3 py-2 sm:px-4 sm:py-3 flex items-center gap-2 text-blue-900';
+
+            const message = document.createElement('p');
+            message.className = 'text-xs sm:text-sm font-medium flex-1';
+            message.textContent = messageText;
+
+            const installButton = document.createElement('button');
+            installButton.className = 'bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md transition-colors';
+            installButton.textContent = 'Install';
+
+            const dismissButton = document.createElement('button');
+            dismissButton.className = 'text-blue-700 hover:text-blue-900 text-lg leading-none px-1';
+            dismissButton.setAttribute('aria-label', 'Dismiss install prompt');
+            dismissButton.textContent = '×';
+
+            dismissButton.addEventListener('click', () => {
+                installBannerDismissed = true;
+                hideInstallBanner();
+            });
+
+            if (isAndroidPrompt) {
+                installButton.addEventListener('click', async () => {
+                    if (!deferredInstallPrompt) return;
+                    deferredInstallPrompt.prompt();
+                    await deferredInstallPrompt.userChoice;
+                    deferredInstallPrompt = null;
+                    hideInstallBanner();
+                });
+            } else {
+                installButton.textContent = 'Got it';
+                installButton.addEventListener('click', () => {
+                    installBannerDismissed = true;
+                    hideInstallBanner();
+                });
+            }
+
+            banner.appendChild(message);
+            banner.appendChild(installButton);
+            banner.appendChild(dismissButton);
+            appRoot.insertBefore(banner, appRoot.firstChild);
+        }
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            deferredInstallPrompt = event;
+            createInstallBanner('Install this app for offline use', true);
+        });
+
+        const isIosNotStandalone = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.navigator.standalone;
+        if (isIosNotStandalone) {
+            createInstallBanner('⤴ Tap Share, then "Add to Home Screen" to install', false);
+        }
 
     </script>
 </body>

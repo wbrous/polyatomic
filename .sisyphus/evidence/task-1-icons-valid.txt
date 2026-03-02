@@ -1,0 +1,13 @@
+icon-192.png:         PNG image data, 192 x 192, 8-bit/color RGB, non-interlaced
+icon-512.png:         PNG image data, 512 x 512, 8-bit/color RGB, non-interlaced
+apple-touch-icon.png: PNG image data, 180 x 180, 8-bit/color RGB, non-interlaced
+---
+/Users/wils/Projects/polyatomic/icon-192.png
+  pixelHeight: 192
+  pixelWidth: 192
+/Users/wils/Projects/polyatomic/icon-512.png
+  pixelHeight: 512
+  pixelWidth: 512
+/Users/wils/Projects/polyatomic/apple-touch-icon.png
+  pixelHeight: 180
+  pixelWidth: 180
