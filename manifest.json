@@ -1,7 +1,7 @@
 {
   "name": "Polyatomic Ion Memorizer",
   "short_name": "Ion Quiz",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f1f5f9",

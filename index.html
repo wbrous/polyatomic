@@ -38,7 +38,9 @@
         }
         html, body { overscroll-behavior-y: none; }
         * { -webkit-tap-highlight-color: transparent; }
-        input { font-size: 16px !important; }
+        @media (max-width: 640px) {
+            #quiz-input { font-size: 16px; }
+        }
         #ion-grid label > div { min-height: 44px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
 
     </style>
@@ -87,19 +89,19 @@
             <div id="view-quiz" class="hidden fade-in flex-col h-full flex-grow">
                 <div class="flex justify-between items-center mb-8">
                     <div class="text-slate-500 font-medium text-sm">Session Progress: <span id="quiz-counter" class="text-slate-800 font-bold">0</span> questions</div>
-                    <button id="btn-stop" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors shadow-sm">
+                    <button id="btn-stop" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-semibold transition-colors shadow-sm">
                         Stop & Assess
                     </button>
                 </div>
 
-                <div class="flex-grow flex flex-col items-center justify-center max-w-md mx-auto w-full text-center">
+                <div class="flex-grow flex flex-col items-center justify-center max-w-md mx-auto w-full text-center pb-4">
                     <h3 class="text-xl text-slate-500 mb-2">What is the formula for...</h3>
                     <h2 id="quiz-question" class="text-3xl sm:text-5xl font-extrabold text-blue-900 mb-8 tracking-tight">Sulfate</h2>
                     
                     <div class="w-full relative">
                         <input type="text" id="quiz-input" autocomplete="off" placeholder="e.g. SO42-" class="w-full text-center text-xl sm:text-3xl font-bold py-4 px-6 border-4 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-300 placeholder:normal-case placeholder:font-normal placeholder:text-xl">
                         
-                        <div id="quiz-feedback" class="absolute -bottom-16 left-0 right-0 font-bold text-lg opacity-0 transition-opacity duration-200">
+                        <div id="quiz-feedback" class="absolute -bottom-16 left-0 right-0 font-bold text-lg opacity-0 transition-opacity duration-200 pointer-events-none">
                             <!-- Feedback injected here -->
                         </div>
                     </div>
@@ -265,7 +267,7 @@
             btnStart.addEventListener('click', startQuiz);
 
             // Quiz events
-            quizInput.addEventListener('keypress', (e) => {
+            quizInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') handleSubmission();
             });
             btnSubmit.addEventListener('click', handleSubmission);
@@ -387,7 +389,7 @@
                 const percentage = Math.round((data.firstTryCorrect / data.attempts) * 100);
                 
                 const li = document.createElement('li');
-                li.className = "bg-white p-3 rounded-lg shadow-sm border border-slate-100 flex justify-between items-center";
+                li.className = "bg-white p-3 rounded-lg shadow-sm border border-slate-100 flex justify-between items-center min-h-[44px]";
                 li.innerHTML = `
                     <div>
                         <span class="font-bold text-slate-800 block">${ion.name}</span>
@@ -422,7 +424,7 @@
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('sw.js')
                     .then(reg => console.log('SW registered:', reg.scope))
                     .catch(err => console.warn('SW registration failed:', err));
             });
