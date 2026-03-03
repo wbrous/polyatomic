@@ -1,0 +1,10 @@
+Haptic feedback verification (mobile viewport 390x844)
+
+Method:
+- Injected a `navigator.vibrate` spy in-page.
+- Triggered one correct submission, then one incorrect submission.
+
+Captured vibration log:
+- `[50, [100, 50, 100]]`
+
+Result: PASS

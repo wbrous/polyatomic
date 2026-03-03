@@ -1,14 +1,16 @@
-Offline reload verification in Playwright MCP could not be completed successfully in this environment.
+Offline reload verification (Playwright MCP) - FINAL
 
 Attempt summary:
-- Used BrowserContext offline mode (`context.setOffline(true)`) and attempted `page.reload()`.
-- Result: `net::ERR_INTERNET_DISCONNECTED`.
-- Also attempted full request abort routing during reload.
-- Result: `net::ERR_FAILED` and no DOM available.
+- Loaded app online and waited for service worker install.
+- Confirmed service worker registration/controller in-page: `{ regs: 1, controller: true }`.
+- Switched context offline and reloaded successfully.
+- Verified offline styling remained active:
+  - `document.body` background: `rgb(241, 245, 249)`
+  - `header` background: `rgb(37, 99, 235)`
+- Completed offline quiz flow (correct answer, incorrect answer, `Stop & Assess`).
 
 Evidence:
-- `.sisyphus/evidence/final-qa/task-5-offline-reload-attempt.png`
-- Playwright tool outputs in session logs show repeated `SW registered: http://localhost:8080/` console entries.
+- `.sisyphus/evidence/task-5-offline-styled.png`
+- `.sisyphus/evidence/task-5-offline-assessment.png`
 
-Interpretation:
-- Service worker registration callback executes, but `navigator.serviceWorker.getRegistrations()` reports 0 in this MCP browser context, so offline reload cannot be validated end-to-end here.
+Result: PASS

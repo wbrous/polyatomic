@@ -1,0 +1,23 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - paragraph [ref=e4]: Install this app for offline use
+    - button "Install" [ref=e5] [cursor=pointer]
+    - button "Dismiss install prompt" [ref=e6] [cursor=pointer]: ×
+  - banner [ref=e7]:
+    - heading "Polyatomic Ion Memorizer" [level=1] [ref=e8]
+    - paragraph [ref=e9]: Master your chemical formulas
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e13]: "Session Progress: 1 questions"
+      - button "Stop & Assess" [ref=e14] [cursor=pointer]
+    - generic [ref=e15]:
+      - heading "What is the formula for..." [level=3] [ref=e16]
+      - heading "Cyanide" [level=2] [ref=e17]
+      - generic [ref=e18]:
+        - textbox "e.g. SO42-" [active] [ref=e19]
+        - generic [ref=e21]:
+          - text: Incorrect. The formula is
+          - generic [ref=e22]:
+            - text: CN
+            - superscript [ref=e23]: "-"
+      - button "Submit" [ref=e24] [cursor=pointer]

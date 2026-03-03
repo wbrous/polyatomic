@@ -1,0 +1,40 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - paragraph [ref=e4]: Install this app for offline use
+    - button "Install" [ref=e5] [cursor=pointer]
+    - button "Dismiss install prompt" [ref=e6] [cursor=pointer]: ×
+  - banner [ref=e7]:
+    - heading "Polyatomic Ion Memorizer" [level=1] [ref=e8]
+    - paragraph [ref=e9]: Master your chemical formulas
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - heading "Your Assessment" [level=2] [ref=e27]
+      - paragraph [ref=e28]: Here is how well you know these ions based on your first attempt per question.
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - heading "Mastered >80%" [level=3] [ref=e31]:
+          - text: Mastered
+          - generic [ref=e32]: ">80%"
+        - list [ref=e33]:
+          - listitem [ref=e34]: None yet
+      - generic [ref=e35]:
+        - heading "Learning 50-80%" [level=3] [ref=e36]:
+          - text: Learning
+          - generic [ref=e37]: 50-80%
+        - list [ref=e38]:
+          - listitem [ref=e39]: None yet
+      - generic [ref=e40]:
+        - heading "Needs Work <50%" [level=3] [ref=e41]:
+          - text: Needs Work
+          - generic [ref=e42]: <50%
+        - list [ref=e43]:
+          - listitem [ref=e44]:
+            - generic [ref=e45]:
+              - generic [ref=e46]: Cyanide
+              - generic [ref=e47]:
+                - text: CN
+                - superscript [ref=e48]: "-"
+            - generic [ref=e49]:
+              - text: 0%
+              - generic [ref=e50]: 0/1 correct
+    - button "Return to Menu" [ref=e51] [cursor=pointer]

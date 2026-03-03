@@ -1,0 +1,7 @@
+Service worker forbidden-pattern check
+
+- Checked `sw.js` for push/notification/sync handlers: none found.
+- Checked `sw.js` for storage persistence APIs outside Cache API: none found.
+- Fetch/install/activate handlers only.
+
+Result: PASS

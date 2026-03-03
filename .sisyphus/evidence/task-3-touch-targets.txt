@@ -1,0 +1,7 @@
+Touch target validation (mobile viewport 375x667)
+
+- Minimum ion tile height (`#ion-grid label > div`): 72px
+- Start button height (`#btn-start`): 60px
+- Stop button class now includes mobile-safe sizing (`px-3 py-2`) and minimum row/list target class is present (`min-h-[44px]`)
+
+Result: PASS (all measured/defined targets >= 44px)
